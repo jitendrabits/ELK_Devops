@@ -1,0 +1,6 @@
+http.host: "0.0.0.0"
+path.config: /usr/share/logstash/pipeline
+xpack.monitoring.elasticsearch.hosts: [ "localhost:9200" ]
+
+#these configurations ensure that Logstash listens for incoming HTTP requests on all network interfaces, looks for its configuration files
+# in the specified directory, and sends monitoring data to an Elasticsearch instance running on localhost at port 9200.

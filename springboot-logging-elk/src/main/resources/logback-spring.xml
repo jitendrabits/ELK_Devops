@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:5000</destination>
+        <!-- this ensure the message encoding in the jsnon format -->
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+<!--            Mapped Diagnostic Context, which allows adding contextual information to log messages log from different sources.-->
+                <mdc />
+                <context />
+<!--             Log level (e.g., INFO, ERROR).-->
+                <logLevel />
+                <!--Name of the logger-->
+                <loggerName />
+                <pattern>
+                <!-- pattern: Allows defining custom patterns. In this case, it adds a custom field named "app" with the value "test-log". -->
+                    <pattern>
+                        {
+                        "app": "test-log"
+                        }
+                    </pattern>
+                </pattern>
+                <threadName />
+                <message /> <!--  The actual log message-->
+                <logstashMarkers />
+                <stackTrace />
+            </providers>
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="logstash" />
+    </root>
+</configuration>
+
+
+
+<!--
+    
+message	This Logs page 2024-05-02T18:53:38.238672100	<message />
+app	test-log	<pattern>...</pattern>
+level	INFO	<logLevel />
+logger_name	com.lemoncode21.springlogelk.HomeController	<loggerName />
+thread_name	http-nio-8080-exec-8	<threadName /> 
+
+-->
